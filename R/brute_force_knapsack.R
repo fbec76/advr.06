@@ -7,6 +7,20 @@ knapsack_objects <- data.frame(
   v = runif(n = n, 0, 10000)
 )
 
+#' Brute Force Knapsack Function
+#' Solves the knapsack problem using brute force enumeration.
+#' Evaluates all possible combinations of items to find the one with the highest total value
+#' that does not exceed the knapsack capacity.
+#'
+#' @param x A data.frame with two numeric columns: \code{v} for item values and \code{w} for item weights.
+#' @param W A positive numeric value representing the maximum capacity of the knapsack.
+#'
+#' @return A list with two elements:
+#' \describe{
+#'   \item{value}{The maximum total value achievable within the knapsack capacity.}
+#'   \item{elements}{An integer vector of indices corresponding to the selected items.}
+#' }
+#' @export
 brute_force_knapsack <- function(x, W) {
   stopifnot(validate_knapsack_input(x, W))
 
@@ -29,3 +43,4 @@ brute_force_knapsack <- function(x, W) {
   return(list(value = round(best_value), elements = best_combination))
 }
 
+# Takes 0.39 seconds to run for n = 16 objects.

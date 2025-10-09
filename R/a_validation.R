@@ -7,5 +7,7 @@ validate_knapsack_input <- function(x, W) {
     all(x$w >= 0) &&
     is.numeric(W) &&
     is.atomic(W) &&
-    length(W) == 1
+    length(W) == 1 &&
+    W >= 0
+
 }

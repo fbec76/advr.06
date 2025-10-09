@@ -95,4 +95,6 @@ Q: How much time does it take to run the C++ algorithm for n = 1,000,000 objects
 
 > `r st_cpp[3]` seconds
 
-C++ implementation is `r round(st[3] / st_cpp[3], 1)`x faster than the R implementation.
+Q: What performance gain could you get by using Rcpp and C++?
+
+> `r round(st[3] / st_cpp[3], 1)`x faster than the R implementation.

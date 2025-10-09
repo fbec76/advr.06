@@ -13,9 +13,6 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
-
-NOTE: All execution times were recorded on a MacBook Pro with an M1 Pro chip and 16GB of RAM.
-
 The knapsack problem is a classic optimization problem where the goal is to maximize the total value of items placed in a knapsack without exceeding its weight capacity. This report explores three different algorithms to solve the knapsack problem: brute force, dynamic programming, and greedy approach.
 
 ## Setup

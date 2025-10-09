@@ -1,11 +1,44 @@
-# set.seed(42, kind = "Mersenne-Twister", normal.kind = "Inversion")
-# n <- 2000
-# knapsack_objects <- data.frame(w = sample(1:4000, size = n, replace = TRUE),
-#                                v = runif(n = n, 0, 10000))
+suppressWarnings(RNGversion(min(as.character(getRversion()), "3.5.3")))
+set.seed(42, kind = "Mersenne-Twister", normal.kind = "Inversion")
+n <- 2000
+knapsack_objects <- data.frame(
+  w = sample(1:4000, size = n, replace = TRUE),
+  v = runif(n = n, 0, 10000)
+)
 
-test_that("[dynamic] knapsack", {
-  wiki_example <- data.frame("v" = c(5, 4, 3, 2), "w" = c(4, 3, 2, 1))
-  res <- knapsack_dynamic(x = wiki_example, W = 6)
-  expect_equal(res$value, 9)
-  expect_equal(res$elements, c(4, 3, 2))
+test_that("Correct object is returned", {
+  expect_silent(kd <- knapsack_dynamic(x = knapsack_objects[1:8,], W = 3500))
+  expect_named(kd, c("value", "elements"))
+})
+
+test_that("functions rejects errounous input.", {
+  expect_error(knapsack_dynamic("hej", 3500))
+  expect_error(knapsack_dynamic(x = knapsack_objects[1:8,], W = -3500))
+})
+
+test_that("Function return correct results.", {
+  kd <- knapsack_dynamic(x = knapsack_objects[1:8,], W = 3500)
+  expect_equal(round(kd$value), 16770)
+  expect_true(all(round(kd$elements) %in% c(5, 8)))
+
+  kd <- knapsack_dynamic(x = knapsack_objects[1:12,], W = 3500)
+  expect_equal(round(kd$value), 16770)
+  expect_true(all(round(kd$elements) %in% c(5, 8)))
+
+  kd <- knapsack_dynamic(x = knapsack_objects[1:8,], W = 2000)
+  expect_equal(round(kd$value), 15428)
+  expect_true(all(round(kd$elements) %in% c(3, 8)))
+
+  kd <- knapsack_dynamic(x = knapsack_objects[1:12,], W = 2000)
+  expect_equal(round(kd$value), 15428)
+  expect_true(all(round(kd$elements) %in% c(3, 8)))
+
+  st <- system.time(kd <- knapsack_dynamic(x = knapsack_objects[1:16,], W = 2000))
+  expect_true(as.numeric(st)[2] <= 0.01)
+
+  kd <- knapsack_dynamic(x = knapsack_objects[1:800,], W = 3500)
+  expect_equal(round(kd$value), 195283)
+
+  kd <- knapsack_dynamic(x = knapsack_objects[1:1200,], W = 3500)
+  expect_equal(round(kd$value), 276034)
 })

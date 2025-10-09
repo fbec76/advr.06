@@ -1,14 +1,21 @@
 Package: advr.06
-Title: Knapsack Problem
+Type: Package
+Title: Knapsack Problem Algorithms
 Version: 0.0.0.9000
-Authors@R: 
-    person("Finn", "Beckmann", , "finbe486@student.liu.se", role = c("aut", "cre"))
-    person("Max", "Goldbeck-Löwe", , "maxgo900@student.liu.se", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Authors@R: c(
+    person("Finn", "Beckmann", email = "finbe486@student.liu.se", role = c("aut", "cre")),
+    person("Max", "Goldbeck-Löwe", email = "maxgo900@student.liu.se", role = "aut")
+    )
+Description: Implementation of different algorithms to solve the knapsack problem including brute force, dynamic programming, and greedy approaches.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
-Suggests: 
-    testthat (>= 3.0.0)
+Imports: Rcpp
+LinkingTo: Rcpp
+Suggests:
+    testthat (>= 3.0.0),
+    knitr,
+    rmarkdown
 Config/testthat/edition: 3
+VignetteBuilder: knitr

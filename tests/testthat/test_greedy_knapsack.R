@@ -1,9 +1,9 @@
-suppressWarnings(RNGversion(min(as.character(getRversion()),"3.5.3")))
+suppressWarnings(RNGversion(min(as.character(getRversion()), "3.5.3")))
 set.seed(42, kind = "Mersenne-Twister", normal.kind = "Inversion")
 n <- 2000
 knapsack_objects <- data.frame(
-  w=sample(1:4000, size = n, replace = TRUE),
-  v=runif(n = n, 0, 10000)
+  w = sample(1:4000, size = n, replace = TRUE),
+  v = runif(n = n, 0, 10000)
 )
 
 test_that("Correct object is returned", {
@@ -41,4 +41,16 @@ test_that("Function return correct results.", {
 
   gk <- greedy_knapsack(x = knapsack_objects[1:1200,], W = 3500)
   expect_equal(round(gk$value), 270290)
+})
+
+test_that("C++ implementation (fast = TRUE) returns correct object", {
+  expect_silent(gk_cpp <- greedy_knapsack(x = knapsack_objects[1:8,], W = 3500, fast = TRUE))
+  expect_named(gk_cpp, c("value", "elements"))
+})
+
+test_that("C++ implementation returns same results as R implementation", {
+  gk_r <- greedy_knapsack(x = knapsack_objects[1:100,], W = 3500, fast = FALSE)
+  gk_cpp <- greedy_knapsack(x = knapsack_objects[1:100,], W = 3500, fast = TRUE)
+  expect_equal(round(gk_r$value), round(gk_cpp$value))
+  expect_equal(sort(gk_r$elements), sort(gk_cpp$elements))
 })

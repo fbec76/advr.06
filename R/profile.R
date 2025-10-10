@@ -7,7 +7,7 @@
 # )
 #
 # profvis({
-#   brute_force_knapsack(knapsack_objects[1:15, ], W = 2000)
+#   brute_force_knapsack(knapsack_objects, W = 2000)
 #   knapsack_dynamic(knapsack_objects, W = 2000)
 # })
 #

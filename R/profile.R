@@ -1,0 +1,17 @@
+# suppressWarnings(RNGversion(min(as.character(getRversion()), "3.5.3")))
+# set.seed(42, kind = "Mersenne-Twister", normal.kind = "Inversion")
+# n <- 2000
+# knapsack_objects <- data.frame(
+#   w = sample(1:4000, size = n, replace = TRUE),
+#   v = runif(n = n, 0, 10000)
+# )
+#
+# profvis({
+#   brute_force_knapsack(knapsack_objects[1:15, ], W = 2000)
+#   knapsack_dynamic(knapsack_objects, W = 2000)
+# })
+#
+# profvis({
+#   greedy_knapsack(knapsack_objects, W = 2000)
+#   greedy_knapsack(knapsack_objects, W = 2000, fast = TRUE)
+# })

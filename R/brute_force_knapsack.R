@@ -33,5 +33,3 @@ brute_force_knapsack <- function(x, W) {
 
   return(list(value = round(best_value), elements = best_combination))
 }
-
-# Takes 0.39 seconds to run for n = 16 objects.
